@@ -1,0 +1,50 @@
+EasyData From Chaharmahalmet By MiR.am
+Program Developer: MiR.am (mir-am@hotmail.com)
+
+-----------------------------------------------------------------------
+
+Change Log:
+
+Version 0.1 Alpha (June 8, 2015):
+
+New Features:
+- Downloading data from web page
+- Parsing a HTML page (Thanks to BeautifulSoup4 module)
+- Saving data from web page in text file
+- Reading data from text file
+- Extracting data from text file. Getting info such as station name, lat, lon, etc
+- Process data reqeust by user
+- Creating a Console Program (include 4 steps for getting data from chaharmahalmet)
+- 8 Variables has been supported.
+- 202 Stations has been supported.
+
+Version 0.2 Alpha (June 11, 2015):
+
+NewFeatures:
+- Getting long-term data from chaharmahalmet and convert it to the excel file(Thanks to xlsx writer module.)
+- Adding colored terminal text (Thanks to colorma module.)
+
+SolvedIssues:
+- Fixed invalid folder address by user.  
+
+
+Version 0.3 Alpha (June 12, 2015):
+
+New Features:
+- Extracting Anually data from text files
+- Converting Anually data from text files to excel file
+- Adding new step so that user can choose options (Long-term data, Anually data, Monthly data)
+- Adding functions for making dircetories and saving text files
+- New function for processing several data request from user
+
+Version 0.4 Alpha (June 14, 2015):
+
+New Features:
+- Extracting Monthly data from text files
+- Converting Monthly data from text files to excel file
+- Adding new Full Data options to user interface
+- Extracting Full Data(all years + all months) from text files
+- Converting Full Data from text files to excel files
+
+SolvedIssues:
+- Clearing Variables after each user request
