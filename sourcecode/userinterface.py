@@ -4,6 +4,7 @@ __author__ = 'MiR.am'
 # developer: MiR.am
 # date: June 14, 2015
 # version: 0.4 Alpha
+# License: GNU General Public License v3.0
 
 # userinterface of program created in this module
 # Console program
@@ -145,7 +146,7 @@ def program_ui():
 
             print "are you sure that you want these variables? 'yes' or 'no' \n"
 
-            if raw_input('-> ').lower() == 'yes':
+            if 'y' in raw_input('-> ').lower():
 
                 break  # user can go next step
 
@@ -191,7 +192,7 @@ def program_ui():
 
             print "are you sure that you want these stations? 'yes' or 'no' \n"
 
-            if raw_input("-> ").lower() == "yes":
+            if 'y' in raw_input('-> ').lower():
 
                 break  # user can go next step
 
@@ -204,7 +205,7 @@ def program_ui():
 
         print "Do you want to get data agian? 'yes' or 'no'\n"
 
-        if raw_input("-> ").lower() == "no":
+        if 'n' in raw_input('-> ').lower():
 
             break
 

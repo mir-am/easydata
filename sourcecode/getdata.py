@@ -4,6 +4,7 @@ __author__ = 'MiR.am'
 # developer: MiR.am
 # date: June 14, 2015
 # version: 0.4 Alpha
+# License: GNU General Public License v3.0
 
 
 # in this module we get data from chaharmahalmet website
