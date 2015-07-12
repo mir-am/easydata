@@ -2,8 +2,8 @@ __author__ = 'MiR.am'
 
 # program name: EasyData
 # developer: MiR.am
-# date: June 14, 2015
-# version: 0.4 Alpha
+# date: July 11, 2015
+# version: 0.5 Alpha
 # License: GNU General Public License v3.0
 
 
@@ -15,12 +15,13 @@ __author__ = 'MiR.am'
 # os module imported for make directory
 # time module imported for measuring running time
 
-from colorama import Fore
+from colorama import Fore, init
 from bs4 import BeautifulSoup
 from datetime import datetime
 from time import time as r_time
 import urllib
 import os
+import subprocess
 import misc
 import excelfile
 
@@ -277,7 +278,8 @@ def save_data_tf(st_code=[], user_var=[], save_loc=[]):
                 # URL structure: http://www.chaharmahalmet.ir/stat/archive/
                 # iran/provincename/stationname/variablename.asp
 
-                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" + var + ".txt"
+                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" +\
+                       misc.short_var_names[var] + ".txt"
 
                 save_textfile(path,
                 parse_htmlpage(dl_data("http://www.chaharmahalmet.ir/stat/archive/iran/%s/%s/%s.asp"
@@ -306,7 +308,8 @@ def ps_lt_data(st_code=[], user_var=[], save_loc=None):
 
             for var in user_var:
 
-                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" + var + ".txt"
+                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" +\
+                       misc.short_var_names[var] + ".txt"
 
                 store_data = ext_lt_data(read_data(path))
 
@@ -324,7 +327,7 @@ def ps_lt_data(st_code=[], user_var=[], save_loc=None):
 
                     new_st = False
 
-                stations_data[var].append(store_data["Mean"])
+                stations_data[misc.short_var_names[var]].append(store_data["Mean"])
 
         excelfile.ct_lt_excel(stations_data, save_loc[2])
 
@@ -353,7 +356,8 @@ def ps_data_anually(st_code=[], user_var=[], save_loc=None):
 
             for var in user_var:
 
-                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" + var + ".txt"
+                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" +\
+                       misc.short_var_names[var] + ".txt"
 
                 store_data = ext_data_anually(read_data(path))
 
@@ -363,7 +367,7 @@ def ps_data_anually(st_code=[], user_var=[], save_loc=None):
 
                     new_st = False
 
-                st_data_anually[misc.stations[int(code)].keys()[0]][var] = store_data["data"]
+                st_data_anually[misc.stations[int(code)].keys()[0]][misc.short_var_names[var]] = store_data["data"]
 
         excelfile.ct_anually_excel(st_data_anually, save_loc[2])
 
@@ -371,7 +375,7 @@ def ps_data_anually(st_code=[], user_var=[], save_loc=None):
 
     except Exception as error:
 
-        print (Fore.GREEN + "Error: Could not creating anually data!\n" + str(error))
+        print (Fore.RED + "Error: Could not creating anually data!\n" + str(error))
 
 
 # make monthly data ready for users
@@ -389,11 +393,12 @@ def ps_data_monthly(st_code=[], user_var=[], save_loc=None):
 
             for var in user_var:
 
-                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" + var + ".txt"
+                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" +\
+                       misc.short_var_names[var] + ".txt"
 
                 store_data = ext_data_monthly(read_data(path))
 
-                st_data_monthly[misc.stations[int(code)].keys()[0]][var] = store_data
+                st_data_monthly[misc.stations[int(code)].keys()[0]][misc.short_var_names[var]] = store_data
 
         excelfile.ct_monthly_excel(st_data_monthly, save_loc[2])
 
@@ -401,7 +406,7 @@ def ps_data_monthly(st_code=[], user_var=[], save_loc=None):
 
     except Exception as error:
 
-        print (Fore.GREEN + "Error: Could not creating Monthly data!\n" + str(error))
+        print (Fore.RED + "Error: Could not creating Monthly data!\n" + str(error))
 
 
 # make full data ready for users
@@ -419,11 +424,12 @@ def ps_full_data(st_code=[], user_var=[], save_loc=None):
 
             for var in user_var:
 
-                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" + var + ".txt"
+                path = save_loc[1] + "\\" + misc.stations[int(code)].keys()[0].capitalize() + "-" +\
+                       misc.short_var_names[var] + ".txt"
 
                 store_data = ext_full_data(read_data(path))
 
-                st_full_data[misc.stations[int(code)].keys()[0]][var] = store_data
+                st_full_data[misc.stations[int(code)].keys()[0]][misc.short_var_names[var]] = store_data
 
         excelfile.ct_fulldata_excel(st_full_data, save_loc[2])
 
@@ -435,6 +441,8 @@ def ps_full_data(st_code=[], user_var=[], save_loc=None):
 
 # prcoess user request
 def process_user_rq(user_choices=[], st_code=[], user_var=[], save_loc=None):
+
+    misc.get_data_flag = True
 
     time = r_time()
 
@@ -463,4 +471,8 @@ def process_user_rq(user_choices=[], st_code=[], user_var=[], save_loc=None):
         ps_full_data(st_code, user_var, path)
 
     print (Fore.GREEN + "You can see your data at this address: %s\nyour request finished in %.2f"
-           " seconds\n" % (path[0], r_time() - time))
+            " seconds\n" % (path[0], r_time() - time))
+
+    subprocess.call('explorer ' + "\"" + path[0] + "\"", shell=True)
+
+    misc.get_data_flag = False

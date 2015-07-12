@@ -48,3 +48,8 @@ New Features:
 
 SolvedIssues:
 - Clearing Variables after each user request
+
+Version 0.5 Alpha (July 11, 2015):
+
+New Features:
+- Graphical User Interface created for program. (Tkinter)

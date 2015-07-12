@@ -7,11 +7,11 @@ __author__ = 'MiR.am'
 # License: GNU General Public License v3.0
 
 
-from userinterface import *
+from gui import program_gui
 
 def main():
 
-    program_ui()
+    program_gui()
 
 
 # program start from here

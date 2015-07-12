@@ -9,19 +9,25 @@ __author__ = 'MiR.am'
 # in this module, variables and stations has defined
 
 
-var_names = {"tavg": "AVERAGE OF MEAN DAILY TEMPERATURE IN C",
-             "tmin": "AVERAGE OF MINIMUM TEMPERATURE IN C",
-             "tmax": "AVERAGE OF MAXIMUM TEMPERATURE IN C",
-             "rh": "AVERAGE OF RELATIVE HUMIDITY IN PERCENT",
-             "pre": "MONTHLY TOTAL OF PRECIPITATION IN MM",
-             "dust": "NO. OF DAYS WITH DUST",
-             "wind": "AVERAGE OF WIND SPEED IN KNOTS",
-             "sh": "MONTHLY TOTAL OF SUNSHINE HOURS"}
+var_names = {1: "AVERAGE OF MEAN DAILY TEMPERATURE IN C",
+             2: "AVERAGE OF MINIMUM TEMPERATURE IN C",
+             3: "AVERAGE OF MAXIMUM TEMPERATURE IN C",
+             4: "AVERAGE OF RELATIVE HUMIDITY IN PERCENT",
+             5: "MONTHLY TOTAL OF PRECIPITATION IN MM",
+             6: "NO. OF DAYS WITH DUST",
+             7: "AVERAGE OF WIND SPEED IN KNOTS",
+             8: "MONTHLY TOTAL OF SUNSHINE HOURS"}
+
+
+# short names for variables
+short_var_names = {1: "tavg", 2: "tmin", 3: "tmax", 4: "rh", 5: "pre", 6: "dust",
+                   7: "wind", 8: "sh"}
 
 
 # every variabe has a code
-variables = {"tavg": "5", "tmin": "2", "tmax": "3", "rh": "14", "pre": "25",
-             "dust": "33", "wind": "36", "sh": "42"}
+variables = {1: "5", 2: "2", 3: "3", 4: "14", 5: "25",
+             6: "33", 7: "36", 8: "42"}
+
 
 
 # statations and provinces stored in dictionary
@@ -70,6 +76,15 @@ stations = ({u'SHAHREKO': "chb"}, {u'BOROOJEN': "chb"}, {u'KOOHRANG': "chb"}, {u
             {u'HAMEDANF': "ham"}, {u'HAMEDANO': "ham"}, {u'MALAYER': "ham"}, {u'NAHAVAND': "ham"}, {u'TOYSERKA': "ham"},
             {u'YAZD': "yaz"}, {u'ANAR': "yaz"}, {u'BAFGH': "yaz"}, {u'MARVAST': "yaz"}, {u'ROBATPO': "yaz"},
             {u'TABASS': "yaz"}, {u'AGHDA': "yaz"}, {u'GARIZ': "yaz"})
+
+
+
+data_type_name = ("Long-Term Data", "Anually Data", "Monthly Data", "Full Data")
+
+# a flag for critical section of get data module.
+# because user can request data at one time.
+
+get_data_flag = False
 
 
 # print full names of variables for users.
